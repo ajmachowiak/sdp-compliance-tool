@@ -85,6 +85,13 @@ SDP_PRIORITY = "Medium"
 # ==========================================
 # 8. DEFAULT TICKET TEMPLATES
 # ==========================================
+DEFAULT_TICKET_SUBJECT = "Compliance Check for {PCName}"
+
+def get_ticket_subject(pc_name: str) -> str:
+    """Generates the SDP ticket subject for each ticket."""
+    base_pc = str(pc_name).split(".")[0].strip().upper()
+    return DEFAULT_TICKET_SUBJECT.format(PCName=base_pc)
+
 DEFAULT_TICKET_TEMPLATE = (
     "This is an automated notification regarding {PCName}.\n\n"
     "Compliance Findings:\n"

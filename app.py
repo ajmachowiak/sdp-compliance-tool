@@ -233,9 +233,7 @@ def search_existing_ticket(pc_name, access_token):
     }
 
     base_pc = str(pc_name).split(".")[0].strip().upper()
-    # modify the ticket subject here
-    # ensure you apply the exact same to line ~293 as well (under 'ticket creation logic' section)
-    expected_subject = f"IT Action Required: Compliance Check for {base_pc}"
+    expected_subject = config.get_ticket_subject(base_pc)
 
     input_data = {
         "list_info": {
@@ -288,9 +286,7 @@ def create_sdp_ticket(
     }
 
     site_name = config.get_site_from_pc(pc_name)
-    # modify the ticket subject here
-    # ensure it replicates the subject under 'ticket search logic' exactly - otherwise duplicate ticket creation occurs
-    subject = f"IT Action Required: Compliance Check for {pc_name}"
+    subject = config.get_ticket_subject(pc_name)
 
     raw_description = description_template.format(
         PCName=pc_name,
